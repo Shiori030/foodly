@@ -1,14 +1,18 @@
 import { View, Text, Image, StyleSheet } from 'react-native'
 
-export default function Card({ data }) {
+export default function Card({ data, customInfo}) {
   return (
     <View style={styles.card}>
       <View style={styles.cardPhoto}>
         <Image style={styles.cardImage} source={{ uri: data.image }} />
       </View>
       <View style={styles.cardInfo}>
-        <Text numberOfLines={2} style={styles.cardName}>{data.name}</Text>
-        <Text style={styles.cardCategory}>{data.priceLevel} • {data.category}</Text>
+        {customInfo ? (customInfo(data)) : (
+          <View>
+            <Text numberOfLines={1} style={styles.cardName}>{data.name}</Text>
+            <Text style={styles.cardCategory}>{data.priceLevel} • {data.category}</Text>
+          </View>
+        )}
       </View>
     </View>
   )
