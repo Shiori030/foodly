@@ -6,7 +6,7 @@ export default function CardRowGroup({ data }) {
         <View>
             <Text style={styles.choiceTitle}>{data.name}</Text>
             <View style={styles.cardsRow}>
-                {data.items.map((item,index) => (<CardRow key={index} data={item} style={index === data.items.length - 1 ? { borderBottomWidth: 0 } : { borderBottomWidth: 1 }}/>))}
+                {data.items.map((item,index) => (<CardRow key={index} data={item} borderStyle={index === data.items.length - 1 ? { borderBottomWidth: 0 } : { borderBottomWidth: 1 }}/>))}
             </View>
         </View>
     )

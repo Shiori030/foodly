@@ -14,11 +14,16 @@ const windowsHeight = Dimensions.get('window').height;
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory , setSelectedCategory] = useState("0")
 
 
   useEffect(() => {
     getData();
   }, [])
+
+  useEffect(() => {
+    
+  },[selectedCategory])
 
   const getData = async () => {
     try {
@@ -68,10 +73,13 @@ export default function App() {
       <View style={styles.container}>
         <CardGroup data={data} />
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.choice}>
-          {data.categories.map((category, index) => (<TouchableOpacity key={index} style={styles.choiceButton}><Text style={styles.choiceButtonText}>{category.name}</Text></TouchableOpacity>))}
+          <TouchableOpacity  style={styles.choiceButton} onPress={() => setSelectedCategory("0")}><Text style={selectedCategory === "0" ? styles.selectedButton : styles.choiceButtonText}>全部餐點</Text></TouchableOpacity>
+          {data.categories.map((category, index) => (<TouchableOpacity onPress={()=>setSelectedCategory(category.id)} key={index} style={styles.choiceButton}><Text style={selectedCategory === category.id ? styles.selectedButton : styles.choiceButtonText}>{category.name}</Text></TouchableOpacity>))}
         </ScrollView>
         <View style={styles.foodList}>
-          {data.categories.map((category, index) => (<CardRowGroup key={index} data={category} />))}
+        {selectedCategory === "0" ? (data.categories.map((category, index) => (<CardRowGroup key={index} data={category} />))) : (data.categories.filter((category) => {
+            return category.id === selectedCategory 
+          }).map((category,index) =>  (<CardRowGroup key={index} data={category} />)))}
         </View>
       </View>
     </ScrollView>
@@ -84,8 +92,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     position: "absolute",
-    zIndex:999,
-    marginTop:40,
+    zIndex: 999,
+    marginTop: 40,
   },
   container: {
     marginHorizontal: 20,
@@ -125,6 +133,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginRight: 15,
     color: "#8E8E8E",
+  },
+  selectedButton:{
+    fontSize: 24,
+    marginRight: 15,
+    color:'black'
   },
   foodList: {
     marginTop: 20,

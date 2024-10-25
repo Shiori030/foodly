@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "./index",
   "scripts": {
-    "start": "expo start",
+    "start": "WATCHPACK_POLLING=true expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "WATCHPACK_POLLING=true expo start --web"
   },
   "dependencies": {
+    "@ant-design/icons-react-native": "^2.3.2",
     "@ant-design/react-native": "^5.2.3",
     "@expo/metro-config": "^0.18.11",
     "@expo/metro-runtime": "~3.2.3",

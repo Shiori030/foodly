@@ -1,6 +1,8 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import InfoRating from './infoRating'
 import InfoHeader from './infoHeader'
+import Delivery from '../../assets/delivery.svg'
+import Timer from '../../assets/timer.svg'
 
 export default function RestaurantInfo({ data, customHeader, customMiddle, customFooter }) {
 
@@ -15,14 +17,14 @@ export default function RestaurantInfo({ data, customHeader, customMiddle, custo
                 {customFooter ? (customFooter(data.restaurantInfo)) :
                     (<View style={styles.deliveryTimerArea}>
                         <View style={styles.deliveryTimerGroup}>
-                            <Image style={styles.icons} source={require("../../assets/delivery.svg")}></Image>
+                            <Delivery style={styles.icons}/>
                             <View>
                                 <Text style={styles.deliveryTimerText}>{data.restaurantInfo.deliveryPrice}</Text>
                                 <Text style={styles.deliveryTimerTitle}>運費</Text>
                             </View>
                         </View>
                         <View style={styles.deliveryTimerGroup}>
-                            <Image style={styles.icons} source={require("../../assets/timer.svg")}></Image>
+                            <Timer style={styles.icons}/>
                             <View>
                                 <Text style={styles.deliveryTimerText}>{data.restaurantInfo.deliveryTime}</Text>
                                 <Text style={styles.deliveryTimerTitle}>預計時間</Text>

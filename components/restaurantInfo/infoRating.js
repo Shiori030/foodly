@@ -1,10 +1,11 @@
 import { View, Text, Image, StyleSheet } from 'react-native'
+import Star from '../../assets/Star.svg'
 
 export default function InfoRating({data}) {
     return (
         <View style={styles.restaurantRating}>
             <Text>{data.rating}</Text>
-            <Image source={require('../../assets/Star.svg')}></Image>
+            <Star />
             <Text>{data.ratingCount}則評論</Text>
         </View>
     )

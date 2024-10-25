@@ -2,9 +2,9 @@ import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 
 const windowsWidth = Dimensions.get('window').width;
 
-export default function CardRow({ data, style }) {
+export default function CardRow({ data, borderStyle }) {
     return (
-        <View style={[styles.card, style]}>
+        <View style={[styles.card, borderStyle]}>
             <View style={styles.cardPhoto}>
                 <Image style={styles.cardImage} source={{ uri: data.image }} />
             </View>

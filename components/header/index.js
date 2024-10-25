@@ -1,4 +1,8 @@
 import { View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import Back from '../../assets/back.svg'
+import Share from '../../assets/share.svg'
+import Search from '../../assets/search.svg'
+
 
 const windowsWidth = Dimensions.get('window').width;
 
@@ -8,7 +12,7 @@ export default function Header({ customLeft, customMiddle, customRight }) {
             <View style={styles.left}>
                 {customLeft ? (customLeft()) :
                     (<TouchableOpacity>
-                        <Image style={styles.backIcon} source={require('../../assets/back.svg')} />
+                        <Back width={30} height={30}/>
                     </TouchableOpacity>)
                 }
             </View>
@@ -19,10 +23,10 @@ export default function Header({ customLeft, customMiddle, customRight }) {
                 {customRight ? (customRight()) :
                     (<View style={styles.right}>
                         <TouchableOpacity>
-                            <Image style={styles.shareIcon} source={require('../../assets/share.svg')} />
+                            <Share width={45} height={45}/>
                         </TouchableOpacity>
                         <TouchableOpacity>
-                            <Image style={styles.searchIcon} source={require('../../assets/search.svg')} />
+                            <Search width={50} height={43}/>
                         </TouchableOpacity>
                     </View>)
                 }
@@ -45,16 +49,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 18,
     },
-    backIcon: {
-        width: 20,
-        height: 25,
-    },
-    shareIcon: {
-        width: 30,
-        height: 45,
-    },
-    searchIcon: {
-        width: 32,
-        height: 42,
-    }
+    // backIcon: {
+    //     width: 20,
+    //     height: 25,
+    // },
+    // shareIcon: {
+    //     width: 30,
+    //     height: 45,
+    // },
+    // searchIcon: {
+    //     width: 32,
+    //     height: 42,
+    // }
 })
