@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     choiceTitle: {
         fontSize: 20,
         marginTop: 15,
-        marginLeft:10,
     },
     cardsRow: {
         marginTop: 15,

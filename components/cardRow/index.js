@@ -1,4 +1,6 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
+
+const windowsWidth = Dimensions.get('window').width;
 
 export default function CardRow({ data, style }) {
     return (
@@ -7,11 +9,19 @@ export default function CardRow({ data, style }) {
                 <Image style={styles.cardImage} source={{ uri: data.image }} />
             </View>
             <View style={styles.info}>
-                <Text style={styles.name}>{data.name}</Text>
-                <Text numberOfLines={2} ellipsizeMode='tail' style={styles.depiction}>{data.description}</Text>
+                <View>
+                    <Text style={styles.name}>{data.name}</Text>
+                </View>
+                <View style={styles.depictionArea}>
+                    <Text numberOfLines={2} ellipsizeMode='tail' style={styles.depiction}>{data.description}</Text>
+                </View>
                 <View style={styles.flexRow}>
-                    <View><Text style={styles.category}>{data.priceLevel} • {data.category}</Text></View>
-                    <View><Text style={styles.price}>$ {data.price}</Text></View>
+                    <View>
+                        <Text style={styles.category}>{data.priceLevel} • {data.category}</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.price}>$ {data.price}</Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -20,14 +30,17 @@ export default function CardRow({ data, style }) {
 
 const styles = StyleSheet.create({
     info: {
-        width: '70%',
+        width: windowsWidth * 0.60,
         marginLeft: 20,
         paddingRight: 25,
+    },
+    depictionArea:{
+        height:'50%'
     },
     card: {
         display: "flex",
         flexDirection: "row",
-        margin: 8,
+        marginBottom: 15,
         borderBottomWidth: 1,
         paddingBottom: 15,
         borderColor: "#E0E0E0"
@@ -47,8 +60,9 @@ const styles = StyleSheet.create({
     flexRow: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between",
-        paddingRight:15,
+        alignItems:"center",
+        justifyContent:"space-between",
+        paddingRight: 15,
     },
     name: {
         fontSize: 18,
