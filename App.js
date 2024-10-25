@@ -3,6 +3,7 @@ import CardRow from './components/cardRow';
 import RestaurantInfo from './components/restaurantInfo';
 import CardGroup from './components/cardGroup';
 import CardRowGroup from './components/cardRowGroup';
+import Header from './components/header';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-web';
 import { Carousel } from '@ant-design/react-native'
@@ -39,6 +40,9 @@ export default function App() {
 
   return (
     <ScrollView>
+      <View style={styles.headerContainer}>
+        <Header />
+      </View>
       <View style={styles.carouselContainer}>
         <Carousel
           style={styles.carousel}
@@ -67,7 +71,7 @@ export default function App() {
           {data.categories.map((category, index) => (<TouchableOpacity key={index} style={styles.choiceButton}><Text style={styles.choiceButtonText}>{category.name}</Text></TouchableOpacity>))}
         </ScrollView>
         <View style={styles.foodList}>
-        {data.categories.map((category,index) => (<CardRowGroup key={index} data={category}/>))}
+          {data.categories.map((category, index) => (<CardRowGroup key={index} data={category} />))}
         </View>
       </View>
     </ScrollView>
@@ -75,6 +79,14 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  carouselContainer: {
+    position: "relative",
+  },
+  headerContainer: {
+    position: "absolute",
+    zIndex:999,
+    marginTop:40,
+  },
   container: {
     marginHorizontal: 20,
     marginTop: 20,
@@ -106,15 +118,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 3,
   },
-  choice:{
-    marginTop:25,
+  choice: {
+    marginTop: 25,
   },
   choiceButtonText: {
     fontSize: 24,
-    marginRight:15,
-    color:"#8E8E8E",
+    marginRight: 15,
+    color: "#8E8E8E",
   },
-  foodList:{
-    marginTop:20,
+  foodList: {
+    marginTop: 20,
   }
 });
