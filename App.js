@@ -1,11 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
-import CardRow from './components/cardRow';
-import RestaurantInfo from './components/restaurantInfo';
-import CardGroup from './components/cardGroup';
-import CardRowGroup from './components/cardRowGroup';
-import Header from './components/header';
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
-import { ScrollView } from 'react-native-web';
+import RestaurantInfo from './components/RestaurantInfo';
+import CardGroup from './components/CardGroup';
+import CardRowGroup from './components/CardRowGroup';
+import Header from './components/Header';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { Carousel } from '@ant-design/react-native'
 
 const windowsWidth = Dimensions.get('window').width;
@@ -18,14 +16,9 @@ export default function App() {
   const scrollViewRef = useRef(null);
   const [categoryLayout, setCategoryLayout] = useState({});
 
-
   useEffect(() => {
     getData();
   }, [])
-
-  useEffect(() => {
-
-  }, [selectedCategory])
 
   const getData = async () => {
     try {
@@ -44,17 +37,6 @@ export default function App() {
     scrollToCategory(categoryId);
   }
 
-  const scrollToCategory = (categoryId) => {
-    const yOffset = categoryLayout[categoryId];
-    const otherHeight = 830;
-    if (scrollViewRef.current && yOffset !== undefined) {
-      scrollViewRef.current.scrollTo({
-        y: yOffset + otherHeight,
-        animated: true,
-      })
-    }
-  }
-
   const onCategoryLayout = (e, categoryId) => {
     const layout = e.nativeEvent.layout;
     const absoluteY = layout.y;
@@ -65,6 +47,17 @@ export default function App() {
       };
       return updated;
     });
+  }
+
+  const scrollToCategory = (categoryId) => {
+    const yOffset = categoryLayout[categoryId];
+    const otherHeight = 830;
+    if (scrollViewRef.current && yOffset !== undefined) {
+      scrollViewRef.current.scrollTo({
+        y: yOffset + otherHeight,
+        animated: true,
+      })
+    }
   }
 
   if (loading) {

@@ -1,4 +1,4 @@
-import CardRow from '../cardRow'
+import CardRow from '../CardRow'
 import { View, Text, StyleSheet } from 'react-native'
 
 export default function CardRowGroup({ data }) {

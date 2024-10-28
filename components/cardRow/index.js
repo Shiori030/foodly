@@ -16,7 +16,7 @@ export default function CardRow({ data, borderStyle, customPhoto, customInfo }) 
                         <Text style={styles.name}>{data.name}</Text>
                     </View>
                     <View style={styles.depictionArea}>
-                        <Text numberOfLines={2} ellipsizeMode='tail' style={styles.depiction}>{data.description}</Text>
+                        <Text numberOfLines={2} style={styles.depiction}>{data.description}</Text>
                     </View>
                     <View style={styles.flexRow}>
                         <View>
