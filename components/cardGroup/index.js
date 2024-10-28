@@ -1,10 +1,10 @@
 import Card from '../card'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 
-export default function CardGroup({ data }) {
+export default function CardGroup({ data,title }) {
     return (
         <View>
-            <Text style={styles.featured}>推薦餐點</Text>
+            <Text style={styles.featured}>{title}</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.cards}>
                 {data.recommendedItems.map((item, index) => (<Card key={index} data={item} />))}
             </ScrollView>

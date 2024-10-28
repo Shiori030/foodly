@@ -71,7 +71,7 @@ export default function App() {
         <RestaurantInfo data={data} />
       </View>
       <View style={styles.container}>
-        <CardGroup data={data} />
+        <CardGroup data={data} title="推薦餐點"/>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.choice}>
           <TouchableOpacity  style={styles.choiceButton} onPress={() => setSelectedCategory("0")}><Text style={selectedCategory === "0" ? styles.selectedButton : styles.choiceButtonText}>全部餐點</Text></TouchableOpacity>
           {data.categories.map((category, index) => (<TouchableOpacity onPress={()=>setSelectedCategory(category.id)} key={index} style={styles.choiceButton}><Text style={selectedCategory === category.id ? styles.selectedButton : styles.choiceButtonText}>{category.name}</Text></TouchableOpacity>))}

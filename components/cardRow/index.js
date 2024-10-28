@@ -2,28 +2,32 @@ import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 
 const windowsWidth = Dimensions.get('window').width;
 
-export default function CardRow({ data, borderStyle }) {
+export default function CardRow({ data, borderStyle, customPhoto, customInfo }) {
     return (
         <View style={[styles.card, borderStyle]}>
-            <View style={styles.cardPhoto}>
-                <Image style={styles.cardImage} source={{ uri: data.image }} />
-            </View>
-            <View style={styles.info}>
-                <View>
-                    <Text style={styles.name}>{data.name}</Text>
+            {customPhoto ? (customPhoto(data)) : (
+                <View style={styles.cardPhoto}>
+                    <Image style={styles.cardImage} source={{ uri: data.image }} />
                 </View>
-                <View style={styles.depictionArea}>
-                    <Text numberOfLines={2} ellipsizeMode='tail' style={styles.depiction}>{data.description}</Text>
-                </View>
-                <View style={styles.flexRow}>
+            )}
+            {customInfo ? (customInfo(data)) : (
+                <View style={styles.info}>
                     <View>
-                        <Text style={styles.category}>{data.priceLevel} • {data.category}</Text>
+                        <Text style={styles.name}>{data.name}</Text>
                     </View>
-                    <View>
-                        <Text style={styles.price}>$ {data.price}</Text>
+                    <View style={styles.depictionArea}>
+                        <Text numberOfLines={2} ellipsizeMode='tail' style={styles.depiction}>{data.description}</Text>
+                    </View>
+                    <View style={styles.flexRow}>
+                        <View>
+                            <Text style={styles.category}>{data.priceLevel} • {data.category}</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.price}>$ {data.price}</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
+            )}
         </View>
     )
 }
@@ -34,8 +38,8 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         paddingRight: 25,
     },
-    depictionArea:{
-        height:'50%'
+    depictionArea: {
+        height: '50%'
     },
     card: {
         display: "flex",
@@ -60,8 +64,8 @@ const styles = StyleSheet.create({
     flexRow: {
         display: "flex",
         flexDirection: "row",
-        alignItems:"center",
-        justifyContent:"space-between",
+        alignItems: "center",
+        justifyContent: "space-between",
         paddingRight: 15,
     },
     name: {
