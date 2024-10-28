@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import CardRow from './components/cardRow';
 import RestaurantInfo from './components/restaurantInfo';
 import CardGroup from './components/cardGroup';
@@ -14,7 +14,9 @@ const windowsHeight = Dimensions.get('window').height;
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory , setSelectedCategory] = useState("0")
+  const [selectedCategory, setSelectedCategory] = useState("0");
+  const scrollViewRef = useRef(null);
+  const [categoryLayout, setCategoryLayout] = useState({});
 
 
   useEffect(() => {
@@ -22,8 +24,8 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    
-  },[selectedCategory])
+
+  }, [selectedCategory])
 
   const getData = async () => {
     try {
@@ -37,6 +39,34 @@ export default function App() {
     }
   };
 
+  const handleCategorySelect = (categoryId) => {
+    setSelectedCategory(categoryId);
+    scrollToCategory(categoryId);
+  }
+
+  const scrollToCategory = (categoryId) => {
+    const yOffset = categoryLayout[categoryId];
+    const otherHeight = 830;
+    if (scrollViewRef.current && yOffset !== undefined) {
+      scrollViewRef.current.scrollTo({
+        y: yOffset + otherHeight,
+        animated: true,
+      })
+    }
+  }
+
+  const onCategoryLayout = (e, categoryId) => {
+    const layout = e.nativeEvent.layout;
+    const absoluteY = layout.y;
+    setCategoryLayout(prev => {
+      const updated = {
+        ...prev,
+        [categoryId]: absoluteY,
+      };
+      return updated;
+    });
+  }
+
   if (loading) {
     return (
       <Text>載入中...</Text>
@@ -44,7 +74,7 @@ export default function App() {
   }
 
   return (
-    <ScrollView>
+    <ScrollView ref={scrollViewRef}>
       <View style={styles.headerContainer}>
         <Header />
       </View>
@@ -71,15 +101,14 @@ export default function App() {
         <RestaurantInfo data={data} />
       </View>
       <View style={styles.container}>
-        <CardGroup data={data} title="推薦餐點"/>
+        <CardGroup data={data} title="推薦餐點" />
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.choice}>
-          <TouchableOpacity  style={styles.choiceButton} onPress={() => setSelectedCategory("0")}><Text style={selectedCategory === "0" ? styles.selectedButton : styles.choiceButtonText}>全部餐點</Text></TouchableOpacity>
-          {data.categories.map((category, index) => (<TouchableOpacity onPress={()=>setSelectedCategory(category.id)} key={index} style={styles.choiceButton}><Text style={selectedCategory === category.id ? styles.selectedButton : styles.choiceButtonText}>{category.name}</Text></TouchableOpacity>))}
+          {data.categories.map((category, index) => (<TouchableOpacity onPress={() => handleCategorySelect(category.id)} key={index}><Text style={selectedCategory === category.id ? styles.selectedButton : styles.choiceButtonText}>{category.name}</Text></TouchableOpacity>))}
         </ScrollView>
         <View style={styles.foodList}>
-        {selectedCategory === "0" ? (data.categories.map((category, index) => (<CardRowGroup key={index} data={category} />))) : (data.categories.filter((category) => {
-            return category.id === selectedCategory 
-          }).map((category,index) =>  (<CardRowGroup key={index} data={category} />)))}
+          {data.categories.map((category, index) => (
+            <View key={index} onLayout={(event) => onCategoryLayout(event, category.id)}><CardRowGroup data={category} /></View>
+          ))}
         </View>
       </View>
     </ScrollView>
@@ -134,10 +163,10 @@ const styles = StyleSheet.create({
     marginRight: 15,
     color: "#8E8E8E",
   },
-  selectedButton:{
+  selectedButton: {
     fontSize: 24,
     marginRight: 15,
-    color:'black'
+    color: 'black'
   },
   foodList: {
     marginTop: 20,
