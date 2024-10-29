@@ -34,20 +34,23 @@ export default function CardRow({ data, borderStyle, customPhoto, customInfo }) 
 
 const styles = StyleSheet.create({
     info: {
-        width: windowsWidth * 0.60,
+        width: windowsWidth * 0.63,
         marginLeft: 20,
         paddingRight: 25,
     },
     depictionArea: {
-        height: '50%'
+        height: '50%',
+        width:"100%",
     },
     card: {
         display: "flex",
         flexDirection: "row",
-        marginBottom: 15,
+        marginBottom: 14,
         borderBottomWidth: 1,
         paddingBottom: 15,
-        borderColor: "#E0E0E0"
+        borderColor: "#E0E0E0",
+        height:135,
+        marginTop:5,
     },
     cardPhoto: {
         width: 110,

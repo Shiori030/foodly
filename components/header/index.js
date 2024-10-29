@@ -2,17 +2,19 @@ import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import Back from '../../assets/back.svg'
 import Share from '../../assets/share.svg'
 import Search from '../../assets/search.svg'
+import { useEffect } from 'react';
 
 
 const windowsWidth = Dimensions.get('window').width;
 
 export default function Header({ customLeft, customMiddle, customRight }) {
+
     return (
         <View style={styles.headerView}>
             <View style={styles.left}>
                 {customLeft ? (customLeft()) :
                     (<TouchableOpacity>
-                        <Back width={30} height={30} />
+                        <Back fill="white" width={30} height={30} />
                     </TouchableOpacity>)
                 }
             </View>
@@ -23,10 +25,10 @@ export default function Header({ customLeft, customMiddle, customRight }) {
                 {customRight ? (customRight()) :
                     (<View style={styles.right}>
                         <TouchableOpacity>
-                            <Share width={45} height={45} />
+                            <Share fill="white" width={45} height={45} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {console.log(Search)}}>
-                            <Search width={50} height={43}/>
+                        <TouchableOpacity >
+                            <Search fill="white" width={50} height={43}/>
                         </TouchableOpacity>
                     </View>)
                 }

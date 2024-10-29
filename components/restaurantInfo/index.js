@@ -17,14 +17,14 @@ export default function RestaurantInfo({ data, customHeader, customMiddle, custo
                 {customFooter ? (customFooter(data.restaurantInfo)) :
                     (<View style={styles.deliveryTimerArea}>
                         <View style={styles.deliveryTimerGroup}>
-                            <Delivery style={styles.icons}/>
+                            <Delivery fill="#22A45D" style={styles.icons}/>
                             <View>
                                 <Text style={styles.deliveryTimerText}>{data.restaurantInfo.deliveryPrice}</Text>
                                 <Text style={styles.deliveryTimerTitle}>運費</Text>
                             </View>
                         </View>
                         <View style={styles.deliveryTimerGroup}>
-                            <Timer style={styles.icons}/>
+                            <Timer fill="#22A45D" style={styles.icons}/>
                             <View>
                                 <Text style={styles.deliveryTimerText}>{data.restaurantInfo.deliveryTime}</Text>
                                 <Text style={styles.deliveryTimerTitle}>預計時間</Text>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     deliveryTimerArea: {
         display: "flex",
         flexDirection: "row",
-        gap: 30,
+        justifyContent:"space-between"
     },
     deliveryTimerGroup: {
         display: "flex",

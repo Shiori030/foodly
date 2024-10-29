@@ -5,7 +5,7 @@ export default function InfoRating({data}) {
     return (
         <View style={styles.restaurantRating}>
             <Text>{data.rating}</Text>
-            <Star />
+            <Star fill="#22A45D"/>
             <Text>{data.ratingCount}則評論</Text>
         </View>
     )
