@@ -23,7 +23,7 @@ export default function Header({ customLeft, customMiddle, customRight }) {
                 {customRight ? (customRight()) :
                     (<View style={styles.right}>
                         <TouchableOpacity>
-                            <Share width={45} height={45}/>
+                            <Share width={45} height={45} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {console.log(Search)}}>
                             <Search width={50} height={43}/>

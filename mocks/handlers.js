@@ -323,5 +323,11 @@ export const handlers = [
         }
       ]
     })
-  })
+  }),
+  http.get('*', () => {
+    return 
+  }),
+  http.post('*', () => {
+    return 
+  }),
 ]
