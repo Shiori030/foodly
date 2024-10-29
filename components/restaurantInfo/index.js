@@ -14,25 +14,27 @@ export default function RestaurantInfo({ data, customHeader, customMiddle, custo
             <View>
                 {customMiddle ? (customMiddle(data.restaurantInfo)) : (<InfoRating data={data.restaurantInfo} />)}
             </View>
-                {customFooter ? (customFooter(data.restaurantInfo)) :
-                    (<View style={styles.deliveryTimerArea}>
+            {customFooter ? (customFooter(data.restaurantInfo)) :
+                (<View style={styles.deliveryTimerArea}>
+                    <View style={styles.deliveryTimer}>
                         <View style={styles.deliveryTimerGroup}>
-                            <Delivery fill="#22A45D" style={styles.icons}/>
+                            <Delivery fill="#22A45D" style={styles.icons} />
                             <View>
                                 <Text style={styles.deliveryTimerText}>{data.restaurantInfo.deliveryPrice}</Text>
                                 <Text style={styles.deliveryTimerTitle}>運費</Text>
                             </View>
                         </View>
                         <View style={styles.deliveryTimerGroup}>
-                            <Timer fill="#22A45D" style={styles.icons}/>
+                            <Timer fill="#22A45D" style={styles.icons} />
                             <View>
                                 <Text style={styles.deliveryTimerText}>{data.restaurantInfo.deliveryTime}</Text>
                                 <Text style={styles.deliveryTimerTitle}>預計時間</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.takeAwayButton}><Text style={styles.takeAwayText}>外帶</Text></TouchableOpacity>
-                    </View>)
-                }
+                    </View>
+                    <TouchableOpacity style={styles.takeAwayButton}><Text style={styles.takeAwayText}>外帶</Text></TouchableOpacity>
+                </View>)
+            }
         </View>
     )
 }
@@ -41,19 +43,24 @@ const styles = StyleSheet.create({
     deliveryTimerArea: {
         display: "flex",
         flexDirection: "row",
-        justifyContent:"space-between"
+        justifyContent: "space-between"
     },
     deliveryTimerGroup: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center"
     },
+    deliveryTimer:{
+        display:'flex',
+        flexDirection:'row',
+        gap:18,
+    }, 
     takeAwayButton: {
         borderWidth: 1,
         borderColor: "#22A45D",
         borderRadius: 5,
         justifyContent: "center",
-        paddingHorizontal: 20,
+        paddingHorizontal: 40,
         paddingVertical: 10,
     },
     icons: {
