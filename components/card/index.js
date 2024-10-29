@@ -23,6 +23,7 @@ export default function Card({ data, customInfo, customPhoto }) {
 const styles = StyleSheet.create({
   card: {
     width: 150,
+    height:210,
   },
   cardPhoto: {
     overflow: "hidden",
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   cardName: {
     fontSize: 16,
     marginTop: 10,
+    marginRight:5,
   },
   cardCategory: {
     marginTop: 5,
