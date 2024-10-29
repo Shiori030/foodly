@@ -3,7 +3,7 @@ import RestaurantInfo from './components/RestaurantInfo';
 import CardGroup from './components/CardGroup';
 import CardRowGroup from './components/CardRowGroup';
 import Header from './components/Header';
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { Carousel } from '@ant-design/react-native'
 
 const windowsWidth = Dimensions.get('window').width;
@@ -14,7 +14,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("0");
   const scrollViewRef = useRef(null);
-  const [categoryLayout, setCategoryLayout] = useState({});
+  const layoutRef = useRef({});
 
   useEffect(() => {
     getData();
@@ -38,25 +38,20 @@ export default function App() {
   }
 
   const onCategoryLayout = (e, categoryId) => {
-    const layout = e.nativeEvent.layout;
-    const absoluteY = layout.y;
-    setCategoryLayout(prev => {
-      const updated = {
-        ...prev,
-        [categoryId]: absoluteY,
-      };
-      return updated;
-    });
+    if (e?.nativeEvent?.layout) {
+      const layout = e.nativeEvent.layout;
+      layoutRef.current[categoryId] = layout.y;
+    }
   }
 
   const scrollToCategory = (categoryId) => {
-    const yOffset = categoryLayout[categoryId];
+    const yOffset = layoutRef.current[categoryId];
     const otherHeight = 830;
     if (scrollViewRef.current && yOffset !== undefined) {
       scrollViewRef.current.scrollTo({
         y: yOffset + otherHeight,
         animated: true,
-      })
+      });
     }
   }
 
@@ -98,9 +93,11 @@ export default function App() {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.choice}>
           {data.categories.map((category, index) => (<TouchableOpacity onPress={() => handleCategorySelect(category.id)} key={index}><Text style={selectedCategory === category.id ? styles.selectedButton : styles.choiceButtonText}>{category.name}</Text></TouchableOpacity>))}
         </ScrollView>
-        <View style={styles.foodList}>
+      </View>
+      <View style={styles.container}>
+        <View>
           {data.categories.map((category, index) => (
-            <View key={index} onLayout={(event) => onCategoryLayout(event, category.id)}><CardRowGroup data={category} /></View>
+            <View key={index} onLayout={(e) => onCategoryLayout(e, category.id)}><CardRowGroup data={category} /></View>
           ))}
         </View>
       </View>
@@ -160,8 +157,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginRight: 15,
     color: 'black'
-  },
-  foodList: {
-    marginTop: 20,
   }
 });
