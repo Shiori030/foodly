@@ -1,0 +1,14 @@
+{
+  "native": true,
+  "typescript": true,
+  "svgoConfig": {
+    "plugins": [
+      {
+        "name": "removeAttrs",
+        "params": {
+          "attrs": "fill"
+        }
+      }
+    ]
+  }
+}

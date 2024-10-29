@@ -22,14 +22,17 @@
     "react-native-gesture-handler": "~2.16.1",
     "react-native-reanimated": "~3.10.1",
     "react-native-svg": "^15.8.0",
-    "react-native-svg-transformer": "^1.5.0",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.10",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "svgr": "^1.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "msw": "^2.4.11"
+    "@svgr/core": "^8.1.0",
+    "msw": "^2.4.11",
+    "react-native-svg-transformer": "^1.5.0",
+    "svgo": "^3.3.2"
   },
   "private": true
 }
