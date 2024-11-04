@@ -1,4 +1,4 @@
-import Card from '../Card'
+import Card from '../card'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 
 export default function CardGroup({ data,title }) {

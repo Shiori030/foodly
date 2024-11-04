@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
-import RestaurantInfo from './components/RestaurantInfo';
-import CardGroup from './components/CardGroup';
-import CardRowGroup from './components/CardRowGroup';
-import Header from './components/Header';
+import RestaurantInfo from './components/restaurantInfo';
+import CardGroup from './components/cardGroup';
+import CardRowGroup from './components/cardRowGroup';
+import Header from './components/header';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { Carousel } from '@ant-design/react-native'
 

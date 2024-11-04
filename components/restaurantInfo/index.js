@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
-import InfoRating from './InfoRating'
-import InfoHeader from './InfoHeader'
+import InfoRating from './infoRating'
+import InfoHeader from './infoHeader'
 import Delivery from '../../assets/delivery.svg'
 import Timer from '../../assets/timer.svg'
 
